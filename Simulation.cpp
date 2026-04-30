@@ -2,10 +2,14 @@
 #include <iostream>
 using namespace std;
 
-Simulation::Simulation(int simTime, int queueSize)
+Simulation::Simulation(int simTime, int queueSize, int n)
     : queue(queueSize) {
+
     time = 0;
     maxTime = simTime;
+    numServers = n;
+
+    servers = new Server[numServers];
 }
 
 void Simulation::run() {
