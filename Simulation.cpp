@@ -26,15 +26,20 @@ void Simulation::run() {
         }
 
         // Assign worker if server is free
-        if (!server.busy && !queue.isEmpty()) {
-            Worker w = queue.dequeue();
-            server.assignWorker(w, time);
-            cout << "Worker " << w.id << " is being served\n";
-        }
+       for (int i = 0; i < numServers; i++) {
+    if (!servers[i].busy && !queue.isEmpty()) {
+        Worker w = queue.dequeue();
+        servers[i].assignWorker(w, time);
+
+        cout << "Worker " << w.id 
+             << " assigned to Server " << i << endl;
+    }
+}
 
         // Process server
-        server.process();
-
+       for (int i = 0; i < numServers; i++) {
+    servers[i].process();
+}
         cout << "------------------\n";
     }
 }
